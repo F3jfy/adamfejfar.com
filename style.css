@@ -56,15 +56,15 @@ body {
 
 .hero {
   position: relative;
-  background-color: #6C7AAB;
+  background-color: #5d74c7;
   border-radius: 60px;
   padding: 80px 30px;
   width: 100%;
   max-width: 1100px;
   text-align: center;
   backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.103);
   overflow: hidden;
 }
 
@@ -75,11 +75,11 @@ body {
   height: 200px;
   background: radial-gradient(circle, #f44336, #F44336);
   border-radius: 50%;
-  filter: blur(60px);
+  filter: blur(35px);
   opacity: 0.3;
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-  transition: transform 0.08s ease-out;
+  pointer-events: none; /* Still ignore mouse events for this effect */
+  transform: translate(-50%, -50%); /* Center the bubble initially */
+  transition: transform 3s ease-in-out, opacity 1s ease; /* Longer, smoother transition for random movement */
 }
 
 .tagline {
@@ -122,7 +122,9 @@ body {
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
+  height: 100%;
   transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
   will-change: transform;
 }
@@ -139,12 +141,12 @@ body {
 
 .image-aspect img {
   position: absolute;
-  top: 65%;
+  top: 63%;
   left: 50%;
   width: 110%;
   height: 110%;
   object-fit: cover;
-  transform: translate(-50%, -50%) scale(0.9); /* 👈 this is key */
+  transform: translate(-50%, -50%) scale(0.92); /* 👈 this is key */
   border-radius: 10px;
 }
 
@@ -165,20 +167,68 @@ body {
 .project-label {
   display: flex;
   align-items: center;
-  gap: 8px;
+  /* Removed gap for now, we'll manage space with padding and text transform */
   padding: 16px;
   font-weight: 600;
   color: #151515;
+  text-decoration: none;
+  transition: color 0.2s ease; /* Only color transition on the label itself */
+  position: relative;
+  overflow: hidden; /* Crucial to hide the arrow when it's outside */
 }
+
+/* We'll apply the text shift and arrow appearance on hover */
+.project-label:hover {
+  color: #000;
+}
+
+.project-label span.text-content { /* Add a span around your label text in HTML */
+  transition: transform 0.3s ease; /* Smooth transition for the text shift */
+}
+
+.project-label:hover span.text-content {
+  transform: translateX(-20px); /* Shift text slightly to the left */
+}
+
+.project-label::after {
+  content: '→';
+  position: absolute;
+  right: 20px; /* Start the arrow at the current right padding position */
+  opacity: 0;
+  transform: translateX(10px); /* Start further to the right, off-screen */
+  transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth transition for arrow */
+}
+
+.project-label:hover::after {
+  opacity: 1;
+  transform: translateX(0); /* Move arrow into its final position */
+}
+
 
 .project-label img {
   width: 24px;
   height: 24px;
   border-radius: 6px;
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
-.project-label {
-  padding: 20px;
+.project-label:hover img {
+  opacity: 0; /* Make the image disappear */
+  transform: translateX(-20px); /* Move it off to the left as it disappears */
 }
+
+/* Arrow appears only on hover */
+.arrow {
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: all 0.2s ease;
+  font-size: 1.1rem;
+}
+
+.project-label:hover .arrow {
+  opacity: 1;
+  transform: translateX(4px);
+}
+
 
 .project-badge {
   background: #e1e1e1;
@@ -190,7 +240,7 @@ body {
   font-weight: 600;
   color: #242424;
   font-size: 14px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+
 }
 
 .project-badge img {
