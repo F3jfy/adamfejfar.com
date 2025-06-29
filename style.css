@@ -468,6 +468,7 @@ body {
 .call-to-action p {
     
     font-family: 'Inter', sans-serif; /* CHANGE to Inter or remove for default body font */
+    
     font-size: 1.8rem;
     margin-bottom: 25px;
     line-height: 1.4;
@@ -484,6 +485,7 @@ body {
     font-size: 1.1rem;
     transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border: none;
 }
 
 .contact-button:hover {
