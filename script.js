@@ -1,119 +1,71 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // --- Existing Bubble Movement Script ---
     const bubble = document.querySelector('.bubble-follow');
-    const hero = document.querySelector('.hero'); // Get the parent container
-
-    // Ensure bubble and hero elements exist before trying to manipulate them
-    if (!bubble || !hero) {
-        console.warn('Bubble or hero element not found. Skipping animation.');
-        return;
-    }
-
-    // Cache dimensions that don't change often
-    // These will store the width and height of the hero container and the bubble itself.
+    const hero = document.querySelector('.hero');
     let heroWidth, heroHeight;
     let bubbleWidth, bubbleHeight;
 
-    // Function to update dimensions. This will be called on initial load and when the window resizes.
-    const updateDimensions = () => {
-        const heroRect = hero.getBoundingClientRect();
-        heroWidth = heroRect.width;
-        heroHeight = heroRect.height;
+    if (bubble && hero) {
+        const updateDimensions = () => {
+            const heroRect = hero.getBoundingClientRect();
+            heroWidth = heroRect.width;
+            heroHeight = heroRect.height;
+            bubbleWidth = bubble.offsetWidth;
+            bubbleHeight = bubble.offsetHeight;
+        };
 
-        // Using offsetWidth/offsetHeight as they reflect the actual rendered size,
-        // which is what's needed for calculating boundaries.
-        bubbleWidth = bubble.offsetWidth;
-        bubbleHeight = bubble.offsetHeight;
+        function setRandomPosition() {
+            if (heroWidth === 0 || heroHeight === 0) {
+                updateDimensions();
+                if (heroWidth === 0 || heroHeight === 0) return;
+            }
+
+            const maxX = heroWidth - bubbleWidth;
+            const maxY = heroHeight - bubbleHeight;
+
+            if (maxX < 0 || maxY < 0) {
+                bubble.style.transform = `translate(50%, 50%) translate(-50%, -50%)`;
+                bubble.style.opacity = 0.2 + Math.random() * 0.3;
+                return;
+            }
+
+            const randomX = Math.random() * maxX + (bubbleWidth / 2);
+            const randomY = Math.random() * maxY + (bubbleHeight / 2);
+
+            bubble.style.transform = `translate(${randomX}px, ${randomY}px) translate(-50%, -50%)`;
+            bubble.style.opacity = 0.2 + Math.random() * 0.3;
+        }
+
+        updateDimensions();
+        setRandomPosition();
+        window.addEventListener('resize', updateDimensions);
+        setInterval(setRandomPosition, 4000);
+    }
+    // --- End Existing Bubble Movement Script ---
+
+
+    // --- Only Content Fade-in / Slide-up Effect (Scroll Reveal) ---
+    const scrollRevealElements = document.querySelectorAll('.scroll-reveal');
+
+    const checkVisibility = () => {
+        scrollRevealElements.forEach(element => {
+            const rect = element.getBoundingClientRect();
+            // Trigger when element's top is within 85% of viewport height AND element is not completely below viewport
+            if (rect.top <= window.innerHeight * 0.85 && rect.bottom >= 0) {
+                element.classList.add('is-visible');
+            }
+            // Optional: Remove class if it scrolls out of view for re-triggering if needed
+            // else if (rect.top > window.innerHeight || rect.bottom < 0) {
+            //     element.classList.remove('is-visible');
+            // }
+        });
     };
 
-    // Function to set a new random position for the bubble
-    function setRandomPosition() {
-        // Calculate the maximum X and Y coordinates the bubble can move to
-        // while staying fully inside the hero container.
-        // We subtract the bubble's dimensions from the hero's.
-        const maxX = heroWidth - bubbleWidth;
-        const maxY = heroHeight - bubbleHeight;
+    // Initial check on page load
+    checkVisibility();
 
-        // Basic check to prevent issues if the hero container becomes smaller than the bubble.
-        // In such a case, setting random coordinates might push the bubble completely out.
-        if (maxX < 0 || maxY < 0) {
-            // If the container is too small, we can't properly calculate random positions.
-            // A common fallback is to just center the bubble or keep it in place.
-            // Here, we center it using fixed 50% values (which the CSS translate(-50%,-50%) handles).
-            bubble.style.transform = `translate(50%, 50%) translate(-50%, -50%)`;
-            // Still apply random opacity for some visual effect
-            bubble.style.opacity = 0.2 + Math.random() * 0.3;
-            // Log a warning for debugging purposes
-            console.warn('Hero container is smaller than bubble. Bubble positioning might be constrained.');
-            return; // Exit the function as valid random positions can't be calculated.
-        }
+    // Attach to scroll and resize events for continuous checking
+    window.addEventListener('scroll', checkVisibility);
+    window.addEventListener('resize', checkVisibility);
 
-        // Generate random X and Y coordinates within the calculated bounds.
-        // We add half the bubble's width/height because the CSS `transform: translate(-50%, -50%)`
-        // centers the bubble around the point we provide. So, if we want the top-left of the
-        // bubble's *content box* to be at `randomX, randomY`, we need to effectively
-        // set the transform origin to `randomX + halfWidth, randomY + halfHeight`.
-        const randomX = Math.random() * maxX + (bubbleWidth / 2);
-        const randomY = Math.random() * maxY + (bubbleHeight / 2);
-
-        // Apply the new position using the `transform` CSS property.
-        // This is highly optimized by browsers as it can often be handled by the GPU.
-        bubble.style.transform = `translate(${randomX}px, ${randomY}px) translate(-50%, -50%)`;
-
-        // Apply a random opacity. This is also an efficient CSS property to animate.
-        bubble.style.opacity = 0.2 + Math.random() * 0.3; // Random opacity between 0.2 and 0.5
-    }
-
-    // --- Execution Flow ---
-
-    // 1. Initial setup: Update dimensions immediately when the script runs.
-    updateDimensions();
-
-    // 2. Set the bubble's initial position for the first time.
-    setRandomPosition();
-
-    // 3. Re-update dimensions whenever the browser window is resized.
-    // This keeps the bubble within the hero's bounds if the page layout changes.
-    window.addEventListener('resize', updateDimensions);
-
-    // 4. Set up the continuous movement.
-    // `setInterval` will call `setRandomPosition` repeatedly.
-    // The current interval of 4000ms (4 seconds) is very low frequency,
-    // making it very light on the CPU.
-    setInterval(setRandomPosition, 4000);
 });
-
-// --- Existing bubble-follow script (make sure this is still there) ---
-// (Your existing bubble-follow code will go here, if it's already in script.js
-// --- End existing bubble-follow script ---
-
-
-// --- New Contact Modal Script ---
-const getInTouchBtn = document.getElementById('getInTouchBtn');
-const contactModal = document.getElementById('contactModal');
-const closeButton = document.querySelector('.close-button');
-
-if (getInTouchBtn && contactModal && closeButton) {
-    // When the user clicks the button, open the modal
-    getInTouchBtn.onclick = function() {
-        contactModal.classList.add('show');
-    }
-
-    // When the user clicks on <span> (x), close the modal
-    closeButton.onclick = function() {
-        contactModal.classList.remove('show');
-    }
-
-    // When the user clicks anywhere outside of the modal content, close it
-    window.onclick = function(event) {
-        if (event.target == contactModal) {
-            contactModal.classList.remove('show');
-        }
-    }
-
-    // Optional: Close modal with Escape key
-    document.addEventListener('keydown', function(event) {
-        if (event.key === "Escape" && contactModal.classList.contains('show')) {
-            contactModal.classList.remove('show');
-        }
-    });
-}

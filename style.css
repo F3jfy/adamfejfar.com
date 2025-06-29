@@ -678,3 +678,16 @@ body {
 
 /* Remove any contact form styles if you are not using a form on the contact page */
 /* .contact-form, .form-group, .submit-button, etc. */
+
+
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(30px); /* Start slightly below its final position */
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* Smooth transition */
+}
+
+/* State when the element is "visible" (triggered by JS) */
+.scroll-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0); /* Move to its final position */
+}
