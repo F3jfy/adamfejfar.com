@@ -81,3 +81,39 @@ document.addEventListener('DOMContentLoaded', () => {
     // making it very light on the CPU.
     setInterval(setRandomPosition, 4000);
 });
+
+// --- Existing bubble-follow script (make sure this is still there) ---
+// (Your existing bubble-follow code will go here, if it's already in script.js
+// --- End existing bubble-follow script ---
+
+
+// --- New Contact Modal Script ---
+const getInTouchBtn = document.getElementById('getInTouchBtn');
+const contactModal = document.getElementById('contactModal');
+const closeButton = document.querySelector('.close-button');
+
+if (getInTouchBtn && contactModal && closeButton) {
+    // When the user clicks the button, open the modal
+    getInTouchBtn.onclick = function() {
+        contactModal.classList.add('show');
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    closeButton.onclick = function() {
+        contactModal.classList.remove('show');
+    }
+
+    // When the user clicks anywhere outside of the modal content, close it
+    window.onclick = function(event) {
+        if (event.target == contactModal) {
+            contactModal.classList.remove('show');
+        }
+    }
+
+    // Optional: Close modal with Escape key
+    document.addEventListener('keydown', function(event) {
+        if (event.key === "Escape" && contactModal.classList.contains('show')) {
+            contactModal.classList.remove('show');
+        }
+    });
+}
