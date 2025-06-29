@@ -251,4 +251,326 @@ body {
 
 
 
+.project-card-link {
+    display: block;
+    text-decoration: none; /* This is the key line */
+    color: inherit;
+    height: 100%;
+    transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+    will-change: transform;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Web Development Page Specific Styles */
+.content-section {
+    padding: 60px 20px;
+    display: flex;
+    justify-content: center;
+    color: #333; /* Darker text for readability on a light background */
+}
+
+.content-container {
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 40px;
+    width: 100%;
+    max-width: 1100px; /* <--- CHANGE THIS VALUE */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+.content-container h2 {
+    font-size: 2.2rem;
+    color: #5d74c7;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.content-container h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.6rem;
+    color: #444;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+.content-container p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+.services-grid { /* Renamed for clarity but kept class name for HTML consistency */
+    display: flex; /* Use flexbox */
+    flex-direction: column; /* Stack items vertically */
+    gap: 20px; /* Adjust space between stacked service cards */
+    margin-top: 30px;
+    margin-bottom: 40px;
+    /* Optional: Center the stacked cards if they don't take full width */
+    align-items: center;
+}
+
+.service-card {
+    background: #eef2f9;
+    border-radius: 18px;
+    padding: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: left;
+    
+
+    /* --- Add these lines for the stacked layout --- */
+    width: 100%; /* Make cards take full width of their container */
+   /* Set a max-width for individual cards if desired */
+}
+
+.service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.service-card h4 {
+    font-size: 1.4rem;
+    color: #5d74c7;
+    margin-bottom: 12px;
+    margin-top: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+.service-card p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 0;
+}
+
+/* --- Media Queries for Services (Simplified as they are already stacked) --- */
+@media (max-width: 768px) {
+    .service-card {
+        padding: 25px;
+        max-width: 100%; /* Ensure full width on smaller screens */
+    }
+    .service-card h4 {
+        font-size: 1.3rem;
+    }
+}
+
+.process-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+
+.step-card {
+    background: #eef2f9;
+    border-radius: 15px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.step-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+.step-card h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.3rem;
+    color: #5d74c7;
+    margin-bottom: 10px;
+    margin-top: 0;
+}
+
+.step-card p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 0;
+}
+
+.call-to-action {
+    text-align: center;
+    margin-top: 50px;
+    padding: 30px;
+    background: #5d74c7;
+    border-radius: 20px;
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.call-to-action p {
+    
+    font-family: 'Inter', sans-serif; /* CHANGE to Inter or remove for default body font */
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+    line-height: 1.4;
+    color: white;
+}
+.contact-button {
+    display: inline-block;
+    background: #ffffff;
+    color: #5d74c7;
+    padding: 12px 30px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.contact-button:hover {
+    background: #eef2f9;
+    transform: translateY(-2px);
+    color: #4a63a5;
+}
+
+.back-home-button {
+    text-decoration: none;
+    margin: 0 10px;
+    background: #fff;
+    color: #111;
+    padding: 6px 14px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    font-weight: bold;
+}
+
+/* Ensure body background is light for content page */
+body {
+    background: #f8f8f8; /* A slightly lighter background for the content page */
+    color: #333; /* Default text color for the body, overridden in .hero for hero section */
+}
+
+.hero {
+    background-color: #5d74c7; /* Keep hero background consistent */
+    color: white; /* Ensure text in hero remains white */
+}
+
+/* Adjustments for smaller screens */
+@media (max-width: 768px) {
+    .top-bar {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .buttons {
+        margin-top: 15px;
+    }
+
+    .hero {
+        padding: 60px 20px;
+    }
+
+    .tagline {
+        font-size: 1.6rem;
+    }
+
+    .location {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .content-container {
+        padding: 25px;
+    }
+
+    .content-container h2 {
+        font-size: 1.8rem;
+    }
+
+    .content-container h3 {
+        font-size: 1.4rem;
+    }
+
+    .process-steps {
+        grid-template-columns: 1fr; /* Stack steps on small screens */
+    }
+
+    .call-to-action p {
+        font-size: 1.4rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        font-size: 1.2rem;
+    }
+
+    .buttons a {
+        padding: 4px 10px;
+        font-size: 0.9rem;
+    }
+
+    .profile-pic {
+        width: 35px;
+        height: 35px;
+        margin-left: 10px;
+    }
+
+    .hero {
+        border-radius: 40px;
+    }
+
+    .tagline {
+        font-size: 1.3rem;
+    }
+}
