@@ -9,6 +9,7 @@ body {
   background: #f0f0f0;
   color: white;
   min-height: 100vh;
+  text-align: center;
 }
 
 /* Top Navigation */
@@ -125,8 +126,39 @@ body {
   justify-content: space-between;
   align-items: center;
   height: 100%;
-  transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Removed background from here */
   will-change: transform;
+  position: relative; /* Needed for absolute positioning of pseudo-element */
+  z-index: 1; /* Ensures content is above pseudo-element */
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, #6C7AAB, white);
+  opacity: 0; /* Start with the gradient invisible */
+  border-radius: 24px; /* Match the parent's border-radius */
+  transition: opacity 0.3s ease; /* Transition the opacity of the gradient */
+  z-index: -1; /* Place it behind the card content */
+}
+
+.project-card:hover {
+  transform: rotate(-1deg);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.project-card:hover::before {
+  opacity: 1; /* Make the gradient visible on hover */
+}
+
+/* If you have content inside .project-card, ensure it has a background if you want it to appear above the gradient */
+.project-card > * {
+    position: relative;
+    z-index: 2; /* Make sure actual content is above the pseudo-element and has its own background if needed */
 }
 /* Aspect crop for photography image */
 .image-aspect {
@@ -151,11 +183,7 @@ body {
 }
 
 
-.project-card:hover {
-   transform: rotate(-1deg);
-  background: linear-gradient(180deg, #6C7AAB, white);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
-}
+
 
 .project-card img {
   width: 100%;
@@ -690,4 +718,198 @@ body {
 .scroll-reveal.is-visible {
     opacity: 1;
     transform: translateY(0); /* Move to its final position */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* --- NEW: Featured Work Section Styles --- */
+.featured-work-section {
+    padding: 60px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #333; /* For text within this section */
+    background: #f8f8f8; /* Match body background */
+}
+
+.featured-work-header {
+    text-align: center;
+    margin-bottom: 40px;
+    max-width: 800px;
+}
+
+.featured-work-header h2 {
+    font-size: 2.5rem;
+    color: #5d74c7;
+    margin-bottom: 15px;
+    font-family: 'Inter', serif; /* Or Inter, depending on your preference */
+}
+
+.featured-work-header p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #555;
+}
+
+.featured-work-grid {
+    display: grid;
+    gap: 40px; /* Space between featured project items */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+    max-width: 1100px; /* Max width for the grid */
+    width: 100%;
+}
+
+.featured-project-item {
+    display: block; /* Make the whole link block-level */
+    text-decoration: none;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    color: white; /* Default color for overlay text */
+}
+
+.featured-project-item:hover {
+    transform: translateY(-8px); /* Lift effect on hover */
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+}
+
+.featured-project-image-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio (height / width * 100%) */
+    background-color: #eee; /* Placeholder background */
+}
+
+.featured-project-image-wrapper img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease; /* Smooth zoom on hover */
+}
+
+.featured-project-item:hover .featured-project-image-wrapper img {
+    transform: scale(1.05); /* Slightly zoom image on hover */
+}
+
+.project-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.0) 0%, rgba(0, 0, 0, 0.8) 100%); /* Fades from transparent to dark */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    padding: 25px;
+    opacity: 0; /* Start invisible */
+    transition: opacity 0.4s ease, background 0.4s ease; /* Smooth transition for overlay */
+    border-radius: 24px; /* Inherit border radius from parent */
+    pointer-events: none; /* Allows clicks to pass through to the link */
+}
+
+.featured-project-item:hover .project-overlay {
+    opacity: 1; /* Make visible on hover */
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%, #6C7AAB 100%); /* Change gradient on hover */
+}
+
+.project-overlay h3 {
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+    font-family: 'Playfair Display', serif;
+    color: white;
+    transform: translateY(20px); /* Start text lower */
+    transition: transform 0.4s ease, opacity 0.4s ease;
+    opacity: 0;
+}
+
+.featured-project-item:hover .project-overlay h3 {
+    transform: translateY(0); /* Move text up */
+    opacity: 1;
+}
+
+.project-overlay p {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 15px;
+    transform: translateY(20px); /* Start text lower */
+    transition: transform 0.4s ease 0.1s, opacity 0.4s ease 0.1s; /* Slightly delayed */
+    opacity: 0;
+}
+
+.featured-project-item:hover .project-overlay p {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.view-project-button {
+    display: inline-block;
+    background: white;
+    color: #5d74c7;
+    padding: 8px 18px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    transform: translateY(20px); /* Start button lower */
+    transition: transform 0.4s ease 0.2s, opacity 0.4s ease 0.2s; /* Further delayed */
+    opacity: 0;
+}
+
+.featured-project-item:hover .view-project-button {
+    transform: translateY(0);
+    opacity: 1;
+    background: #eef2f9;
+}
+
+.view-project-button:hover {
+    background: #e1e1e1;
+    color: #4a63a5;
+}
+
+/* Adjustments for smaller screens */
+@media (max-width: 768px) {
+    .featured-work-header h2 {
+        font-size: 2rem;
+    }
+    .featured-work-header p {
+        font-size: 1rem;
+    }
+    .project-overlay h3 {
+        font-size: 1.4rem;
+    }
+    .project-overlay p {
+        font-size: 0.9rem;
+    }
+    .view-project-button {
+        padding: 6px 14px;
+        font-size: 0.8rem;
+    }
 }
