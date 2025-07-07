@@ -340,7 +340,6 @@ body {
 
 
 
-
 /* Web Development Page Specific Styles */
 .content-section {
     padding: 60px 20px;
@@ -379,13 +378,12 @@ body {
     margin-bottom: 20px;
 }
 
-.services-grid { /* Renamed for clarity but kept class name for HTML consistency */
-    display: flex; /* Use flexbox */
-    flex-direction: column; /* Stack items vertically */
-    gap: 20px; /* Adjust space between stacked service cards */
+.services-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
     margin-top: 30px;
     margin-bottom: 40px;
-    /* Optional: Center the stacked cards if they don't take full width */
     align-items: center;
 }
 
@@ -394,21 +392,47 @@ body {
     border-radius: 18px;
     padding: 30px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    
+    /* --- Subtle Hover Effect Additions (copied from step-card) --- */
+    position: relative; /* Needed for pseudo-element positioning */
+    overflow: hidden; /* Ensures the glow stays within the rounded corners */
+    z-index: 1; /* Ensures content is above the glow */
+    transition: transform 0.4s ease-out, box-shadow 0.4s ease-out, background 0.4s ease-in-out; 
+    /* --- End Subtle Hover Effect Additions --- */
+
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     text-align: left;
-    
-
-    /* --- Add these lines for the stacked layout --- */
     width: 100%; /* Make cards take full width of their container */
-   /* Set a max-width for individual cards if desired */
+}
+
+/* Pseudo-element for the "subtle glow" effect on service cards (copied from step-card) */
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0; /* Start with no width/height */
+    height: 0; /* Start with no width/height */
+    background: radial-gradient(circle, rgba(93, 116, 199, 0.15) 0%, rgba(93, 116, 199, 0) 70%); /* Softer blue glow */
+    border-radius: 50%;
+    transform: translate(-50%, -50%); /* Center the pseudo-element */
+    opacity: 0; /* Start invisible */
+    transition: width 0.5s ease-in-out, height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    z-index: -1; /* Place it behind the content */
 }
 
 .service-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    transform: translateY(-8px); /* Less pronounced lift, no rotation */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); /* Softer shadow */
+    background: #e6eaf3; /* Subtle background color change on hover (copied from step-card) */
+}
+
+.service-card:hover::before {
+    width: 120%; /* Smaller glow expansion */
+    height: 120%; /* Smaller glow expansion */
+    opacity: 0.8; /* Slightly less opaque glow */
 }
 
 .service-card h4 {
@@ -417,6 +441,8 @@ body {
     margin-bottom: 12px;
     margin-top: 0;
     font-family: 'Inter', sans-serif;
+    position: relative; /* Ensure text stays above glow */
+    z-index: 2; /* Ensure text stays above glow */
 }
 
 .service-card p {
@@ -424,6 +450,8 @@ body {
     line-height: 1.6;
     color: #555;
     margin-bottom: 0;
+    position: relative; /* Ensure text stays above glow */
+    z-index: 2; /* Ensure text stays above glow */
 }
 
 /* --- Media Queries for Services (Simplified as they are already stacked) --- */
@@ -435,23 +463,23 @@ body {
     .service-card h4 {
         font-size: 1.3rem;
     }
+    /* Adjust hover effect for smaller screens (copied from step-card) */
+    .service-card:hover {
+        transform: translateY(-5px); /* Even subtler lift on mobile, no rotation */
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12); /* Even subtler shadow on mobile */
+    }
 }
+
+/* Process Steps Styles with Mind-blowing Hover Effect */
 
 .process-steps {
     display: grid;
     gap: 25px;
     margin-top: 30px;
     margin-bottom: 40px;
-      grid-template-columns: repeat(2, 1fr); /* Explicitly 2 columns */
-
-  margin-left: auto; /* Center the grid */
-  margin-right: auto; /* Center the grid */
-}
-@media (max-width: 768px) { /* Adjust breakpoint if you want them to stack sooner */
-    .process-steps {
-        grid-template-columns: 1fr; /* Stack steps on small screens */
-        max-width: 100%; /* Ensure it takes full width on small screens */
-    }
+    grid-template-columns: repeat(2, 1fr); /* Explicitly 2 columns */
+    margin-left: auto; /* Center the grid */
+    margin-right: auto; /* Center the grid */
 }
 
 .step-card {
@@ -460,29 +488,98 @@ body {
     padding: 25px;
     text-align: center;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    
+    /* --- Subtle Hover Effect Additions --- */
+    position: relative; /* Needed for pseudo-element positioning */
+    overflow: hidden; /* Ensures the glow stays within the rounded corners */
+    z-index: 1; /* Ensures content is above the glow */
+    /* Smoother transition for transform, box-shadow, and background */
+    transition: transform 0.4s ease-out, box-shadow 0.4s ease-out, background 0.4s ease-in-out; 
+    /* --- End Subtle Hover Effect Additions --- */
+}
+
+/* Pseudo-element for the "subtle glow" effect on step cards */
+.step-card::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0; /* Start with no width/height */
+    height: 0; /* Start with no width/height */
+    background: radial-gradient(circle, rgba(93, 116, 199, 0.15) 0%, rgba(93, 116, 199, 0) 70%); /* Softer blue glow */
+    border-radius: 50%;
+    transform: translate(-50%, -50%); /* Center the pseudo-element */
+    opacity: 0; /* Start invisible */
+    /* Smoother transition for glow expansion */
+    transition: width 0.5s ease-in-out, height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    z-index: -1; /* Place it behind the content */
 }
 
 .step-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+    transform: translateY(-8px); /* Less pronounced lift */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); /* Softer shadow */
+    /* Reverted to a subtle solid background color on hover */
+    background: #e6eaf3; /* A slightly darker shade of the original background for subtle change */
+}
+
+.step-card:hover::before {
+    width: 120%; /* Smaller glow expansion */
+    height: 120%; /* Smaller glow expansion */
+    opacity: 0.8; /* Slightly less opaque glow */
 }
 
 .step-card h3 {
     font-family: 'Inter', sans-serif;
     font-size: 1.3rem;
-    color: #5d74c7;
+    color: #5d74c7; /* Original color */
     margin-bottom: 10px;
     margin-top: 0;
+    position: relative; /* Ensure text stays above glow */
+    z-index: 2; /* Ensure text stays above glow */
+    /* Smoother transition for text color */
+    transition: color 0.4s ease-in-out; 
 }
 
 .step-card p {
     font-size: 0.95rem;
     line-height: 1.6;
-    color: #555;
+    color: #555; /* Original color */
     margin-bottom: 0;
+    position: relative; /* Ensure text stays above glow */
+    z-index: 2; /* Ensure text stays above glow */
+    /* Smoother transition for text color */
+    transition: color 0.4s ease-in-out; 
 }
 
+/* Removed: Text color to white on hover */
+/* .step-card:hover h3,
+.step-card:hover p {
+    color: white;
+} */
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) { /* Adjust breakpoint if you want them to stack sooner */
+    .process-steps {
+        grid-template-columns: 1fr; /* Stack steps on small screens */
+        max-width: 100%; /* Ensure it takes full width on small screens */
+    }
+    .step-card {
+        padding: 20px; /* Slightly less padding on mobile */
+    }
+    .step-card h3 {
+        font-size: 1.2rem; /* Smaller heading on mobile */
+    }
+    .step-card p {
+        font-size: 0.9rem; /* Smaller paragraph text on mobile */
+    }
+    /* Adjust hover effect for smaller screens */
+    .step-card:hover {
+        transform: translateY(-5px); /* Even subtler lift on mobile */
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12); /* Even subtler shadow on mobile */
+    }
+}
+
+/* Existing styles for other sections (included for context if you combine files) */
 .call-to-action {
     text-align: center;
     margin-top: 50px;
@@ -494,9 +591,7 @@ body {
 }
 
 .call-to-action p {
-    
-    font-family: 'Inter', sans-serif; /* CHANGE to Inter or remove for default body font */
-    
+    font-family: 'Inter', sans-serif;
     font-size: 1.8rem;
     margin-bottom: 25px;
     line-height: 1.4;
@@ -546,48 +641,21 @@ body {
 
 /* Adjustments for smaller screens */
 @media (max-width: 768px) {
-    .top-bar {
-        flex-direction: column;
-        padding: 20px;
-    }
-
-    .buttons {
-        margin-top: 15px;
-    }
-
-    .hero {
-        padding: 60px 20px;
-    }
-
-    .tagline {
-        font-size: 1.6rem;
-    }
-
-    .location {
-        flex-direction: column;
-        gap: 10px;
-    }
-
+    /* ... (other responsive adjustments for top-bar, hero, etc.) ... */
     .content-container {
         padding: 25px;
     }
-
     .content-container h2 {
         font-size: 1.8rem;
     }
-
     .content-container h3 {
         font-size: 1.4rem;
     }
-
-    .process-steps {
-        grid-template-columns: 1fr; /* Stack steps on small screens */
-    }
-
     .call-to-action p {
         font-size: 1.4rem;
     }
 }
+
 
 @media (max-width: 480px) {
     .logo {
@@ -842,7 +910,7 @@ body {
 .project-overlay h3 {
     font-size: 1.8rem;
     margin-bottom: 8px;
-    font-family: 'Playfair Display', serif;
+    
     color: white;
     transform: translateY(20px); /* Start text lower */
     transition: transform 0.4s ease, opacity 0.4s ease;
@@ -911,5 +979,128 @@ body {
     .view-project-button {
         padding: 6px 14px;
         font-size: 0.8rem;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* About Me Section Styles - Designed to fit adamfejfar.com/webdevelopment */
+
+/* Container for the entire section, similar to .content-section */
+/* About Me Section CSS */
+
+.about-section-wrapper {
+    padding: 60px 20px; /* Matches padding of other content sections */
+    display: flex;
+    justify-content: center;
+    color: #333; /* Default text color for this section */
+    background: #f8f8f8; /* Matches the body background of the webdevelopment page */
+}
+
+/* Inner container for the About Me content, similar to .content-container */
+.about-content-container {
+    background: #ffffff; /* White background */
+    border-radius: 24px; /* Rounded corners */
+    padding: 40px; /* Inner padding */
+    width: 100%;
+    max-width: 1100px; /* Adjust this max-width if you want it narrower, matching your .content-container */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08); /* Subtle shadow */
+    text-align: center; /* Center align content within the container */
+    
+    /* --- Subtle Hover Effect Additions (similar to step-card) --- */
+    position: relative; /* Needed for pseudo-element positioning */
+    overflow: hidden; /* Ensures the glow stays within the rounded corners */
+    z-index: 1; /* Ensures content is above the glow */
+    /* Smoother transition for transform, box-shadow, and background */
+    transition: transform 0.4s ease-out, box-shadow 0.4s ease-out, background 0.4s ease-in-out; 
+    /* --- End Subtle Hover Effect Additions --- */
+}
+
+/* Pseudo-element for the "subtle glow" effect (similar to step-card) */
+.about-content-container::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0; /* Start with no width/height */
+    height: 0; /* Start with no width/height */
+    background: radial-gradient(circle, rgba(93, 116, 199, 0.15) 0%, rgba(93, 116, 199, 0) 70%); /* Softer blue glow */
+    border-radius: 50%;
+    transform: translate(-50%, -50%); /* Center the pseudo-element */
+    opacity: 0; /* Start invisible */
+    /* Smoother transition for glow expansion */
+    transition: width 0.5s ease-in-out, height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    z-index: -1; /* Place it behind the content */
+}
+
+/* Heading for the About Me section (e.g., "About Me") */
+.about-content-container h2 {
+    font-size: 2.2rem; /* Matches .content-container h2 */
+    color: #5d74c7; /* Primary blue color */
+    margin-bottom: 25px;
+    font-family: 'Inter', sans-serif; /* Use Inter font as per other content */
+    font-weight: bold; /* Keep it bold for a heading */
+    position: relative; /* Ensure text stays above glow */
+    z-index: 2; /* Ensure text stays above glow */
+}
+
+/* Paragraph text within the About Me section */
+.about-content-container p {
+    font-size: 1.1rem; /* Matches .content-container p */
+    line-height: 1.7;
+    margin-bottom: 20px;
+    color: #333; /* Darker text for readability on white background */
+    font-family: 'Inter', sans-serif; /* Use Inter font */
+    font-style: normal; /* Remove italic style to match other content sections */
+    position: relative; /* Ensure text stays above glow */
+    z-index: 2; /* Ensure text stays above glow */
+}
+
+/* Specific styling for the strong (bolded) text within the paragraph */
+.about-content-container p strong {
+    font-weight: bold; /* Ensure bold text remains bold */
+    color: #333; /* Keep bold text color consistent with paragraph */
+}
+
+/* --- Subtle Hover Effect (similar to step-card) --- */
+.about-content-container:hover {
+    transform: translateY(-8px); /* Less pronounced lift, no rotation */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); /* Softer shadow */
+    /* Updated: Gradient from lighter color to white */
+    background: linear-gradient(180deg, #eef2f9 0%, #ffffff 100%); 
+}
+
+.about-content-container:hover::before {
+    width: 120%; /* Smaller glow expansion */
+    height: 120%; /* Smaller glow expansion */
+    opacity: 0.8; /* Slightly less opaque glow */
+}
+/* --- End Subtle Hover Effect --- */
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .about-content-container {
+        padding: 25px; /* Smaller padding on mobile */
+    }
+    .about-content-container h2 {
+        font-size: 1.8rem; /* Smaller heading on mobile */
+    }
+    .about-content-container p {
+        font-size: 1rem; /* Smaller paragraph text on mobile */
+    }
+    /* Adjust hover effect for smaller screens if needed */
+    .about-content-container:hover {
+        transform: translateY(-5px); /* Even subtler lift on mobile, no rotation */
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12); /* Even subtler shadow on mobile */
     }
 }
