@@ -41,52 +41,14 @@ body {
   white-space: nowrap;
 }
 
-/* Navigation Buttons */
+/* Hide horizontal buttons everywhere */
 .buttons {
-  display: flex; /* Keep this for desktop view */
-  align-items: center;
-  /* Remove max-height, overflow, and opacity from here for desktop */
+  display: none !important;
 }
 
-
-.buttons a {
-  text-decoration: none;
-  margin: 0 10px;
-  background: #fff;
-  color: #111;
-  padding: 6px 14px;
-  border-radius: 8px;
-  box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-  font-weight: bold;
-  transition: all 0.3s ease;
-  position: relative;
-  z-index: 0;
-  overflow: hidden;
-}
-
-/* Hover animation */
-.buttons a::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.03);
-  transition: all 0.4s ease;
-  z-index: -1;
-}
-.buttons a:hover::after {
-  left: 0;
-}
-.buttons a:hover {
-  transform: scale(1.03);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-
+/* Hamburger icon always visible */
 .menu-toggle {
-  display: none;
+  display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: 24px;
@@ -155,7 +117,7 @@ body {
   transform: translateY(20px);
 }
 
-/* ✨ Divider fade effect */
+/* Divider fade effect */
 .overlay-menu a::before {
   content: '';
   position: absolute;
@@ -183,97 +145,21 @@ body {
   transform: translateY(0);
 }
 
-.overlay-menu a:hover {
-  color:#5d74c7;
-  
+.overlay-menu a:hover,
+.overlay-menu a.active {
+  color: #5d74c7;
 }
 
-/* Responsive for mobile */
-@media (max-width: 900px) {
-  .top-bar {
-    padding: 15px 20px;
-  }
-
-  .logo {
-    font-size: 1.2rem;
-  }
-
-  
-
-  .menu-toggle {
-    display: flex; /* Show hamburger on mobile */
-  }
-
-  .buttons {
-    display: none;
-  position: absolute;
-  top: 70px;
-  left: 10px;
-  right: 10px;
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(10px);
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 0 0 16px 16px;
-  flex-direction: column;
-  align-items: stretch;
-  max-height: 0;
-  overflow: hidden;
-  opacity: 0;
-  z-index: 999;
-  padding: 0;
-  transition: max-height 0.5s ease, opacity 0.5s ease, padding 0.3s ease;
+.overlay-menu a:hover::before,
+.overlay-menu a.active::before {
+  background: linear-gradient(
+    to right,
+    transparent,
+    #5d74c7,
+    transparent
+  );
 }
 
-.buttons.open {
-  max-height: 500px;
-  opacity: 1;
-  padding: 12px 0;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-}
-
-.buttons a {
-  width: 90%;
-  margin: 12px auto;
-  padding: 10px 0;
-  font-size: 1rem;
-  text-align: center;
-  background: #ffffff;
-  border-radius: 12px;
-  border: 1px solid #ddd;
-  color: #111;
-  font-weight: 600;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
-  opacity: 0;
-  transform: translateY(-10px);
-  animation: navLinkFade 0.4s ease forwards;
-}
-
-.buttons.open a:nth-child(1) { animation-delay: 0.1s; }
-.buttons.open a:nth-child(2) { animation-delay: 0.2s; }
-/* add more delays if you have more links */
-
-@keyframes navLinkFade {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-
-  /* Animate 3 dots into 1 red dot */
-  .menu-toggle.open span:nth-child(1),
-  .menu-toggle.open span:nth-child(3) {
-    opacity: 0;
-  }
-
-  .menu-toggle.open span:nth-child(2) {
-    background: red;
-    width: 8px;
-    height: 8px;
-    margin: auto;
-    border-radius: 50%;
-  }
-}
 
 
 
