@@ -102,7 +102,7 @@ body {
 }
 
 /* Responsive for mobile */
-@media (max-width: 600px) {
+@media (max-width: 900px) {
   .top-bar {
     padding: 15px 20px;
   }
