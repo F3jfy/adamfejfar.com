@@ -6,24 +6,34 @@
     <title>Adam Fejfar</title>
     <link rel="stylesheet" href="style.css" />
       <link rel="icon" type="image/png" href="pp.jpg">
-  
+  <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+/>
+
   <link rel="apple-touch-icon" href="pp.jpg">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500&family=Inter:wght@400;600&display=swap" rel="stylesheet">
     </head>
 
     <body>
    <div class="top-bar">
-  <img class="profile-pic" src="pp.jpg" alt="Adam Fejfar" />
+  <img src="pp.jpg" alt="Profile" class="profile-pic" />
 
+  <div class="logo">Adam Fejfar</div>
 
-  <div class="menu-toggle" id="menuToggle">
+  <div id="menuToggle" class="menu-toggle">
     <span></span><span></span><span></span>
   </div>
+</div>
 
-  <div class="buttons" id="menu">
-    <a href="https://www.instagram.com/photos_by_fejfy/?hl=cs">INSTAGRAM</a>
-    <a href="https://github.com/F3jfy">GITHUB</a>   
-  </div>
+<div id="menu" class="overlay-menu">
+  <a href="#about">About Me</a>
+  <a href="#projects">Projects</a>
+  <a href="https://www.instagram.com/photos_by_fejfy/?hl=cs" target="_blank">Instagram</a>
+  <a href="https://github.com/F3jfy" target="_blank">GitHub</a>
+</div>
+
+
 </div>
 
 
@@ -51,7 +61,7 @@
         </div>
     </section>
 -->
-    <section class="about-section-wrapper">
+    <section id="about" class="about-section-wrapper">
         <div class="about-content-container">
             <!-- Section Heading -->
             <h2>
@@ -65,7 +75,7 @@
         </div>
          </section>
 
-        <section class="featured-work-section scroll-reveal">
+        <section id="projects" class="featured-work-section scroll-reveal">
         <div class="featured-work-header">
             <h2>My Recent Work</h2>
             <p>Dive into some of the web experiences I've brought to life.</p>
@@ -160,15 +170,55 @@
             </div>
         </div>
     </section>
+
+    <a href="contact.html" class="floating-contact">
+  <i class="fas fa-envelope"></i> Contact Me
+</a>
+
+
 <script>
   const menuToggle = document.getElementById('menuToggle');
   const menu = document.getElementById('menu');
+  const menuLinks = document.querySelectorAll('.overlay-menu a');
 
   menuToggle.addEventListener('click', () => {
     menu.classList.toggle('open');
     menuToggle.classList.toggle('open');
   });
+
+  // Close the menu when any internal link is clicked
+  menuLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href');
+      if (href.startsWith('#')) {
+        menu.classList.remove('open');
+        menuToggle.classList.remove('open');
+      }
+    });
+  });
+
+  // Highlight the active section as user scrolls
+  const sections = document.querySelectorAll('section');
+  window.addEventListener('scroll', () => {
+    let scrollPos = window.scrollY + 150;
+
+    sections.forEach(section => {
+      const id = section.getAttribute('id');
+      const offsetTop = section.offsetTop;
+      const offsetHeight = section.offsetHeight;
+
+      const link = document.querySelector(`.overlay-menu a[href="#${id}"]`);
+      if (link) {
+        if (scrollPos >= offsetTop && scrollPos < offsetTop + offsetHeight) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      }
+    });
+  });
 </script>
+
 
 
     <script src="script.js"></script>

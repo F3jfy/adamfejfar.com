@@ -23,8 +23,8 @@ body {
 
 /* Profile Picture */
 .profile-pic {
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid white;
@@ -48,15 +48,6 @@ body {
   /* Remove max-height, overflow, and opacity from here for desktop */
 }
 
-/* Hide hamburger by default on desktop */
-.menu-toggle {
-  display: none; /* Hide on large screens */
-  flex-direction: column;
-  justify-content: space-between;
-  width: 24px;
-  height: 20px;
-  cursor: pointer;
-}
 
 .buttons a {
   text-decoration: none;
@@ -94,6 +85,16 @@ body {
 }
 
 
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 24px;
+  height: 20px;
+  cursor: pointer;
+  z-index: 10001;
+}
+
 .menu-toggle span {
   display: block;
   height: 4px;
@@ -101,6 +102,90 @@ body {
   background: #000;
   border-radius: 10px;
   transition: all 0.3s ease;
+}
+
+.menu-toggle.open span:nth-child(1),
+.menu-toggle.open span:nth-child(3) {
+  opacity: 0;
+}
+
+.menu-toggle.open span:nth-child(2) {
+  background: red;
+  width: 8px;
+  height: 8px;
+  margin: auto;
+  border-radius: 50%;
+}
+
+/* === Fullscreen Overlay Nav === */
+.overlay-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: height 0.5s ease, opacity 0.4s ease;
+  opacity: 0;
+  z-index: 10000;
+}
+
+.overlay-menu.open {
+  height: 100vh;
+  opacity: 1;
+}
+
+.overlay-menu a {
+  text-decoration: none;
+  font-size: 1.5rem;
+  color: #111;
+  font-weight: bold;
+  padding: 15px 0;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  transition: color 0.3s ease;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* ✨ Divider fade effect */
+.overlay-menu a::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(0, 0, 0, 0.2),
+    transparent
+  );
+  transition: background 0.3s ease;
+}
+
+.overlay-menu a:first-child::before {
+  content: none;
+  display: none;
+}
+
+.overlay-menu.open a {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.overlay-menu a:hover {
+  color:#5d74c7;
+  
 }
 
 /* Responsive for mobile */
@@ -113,53 +198,67 @@ body {
     font-size: 1.2rem;
   }
 
-  .profile-pic {
-    width: 36px;
-    height: 36px;
-    margin: 12px auto;
-  }
+  
 
   .menu-toggle {
     display: flex; /* Show hamburger on mobile */
   }
 
   .buttons {
-    position: absolute;
-    top: 70px;
-    left: 0;
-    right: 0;
-    background: #fff;
-    flex-direction: column;
-    align-items: stretch;
-    max-height: 0; /* Hidden by default on mobile */
-    overflow: hidden;
-    opacity: 0; /* Hidden by default on mobile */
-    z-index: 999;
-    transition: max-height 0.3s ease, opacity 0.3s ease;
-  }
+    display: none;
+  position: absolute;
+  top: 70px;
+  left: 10px;
+  right: 10px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 0 0 16px 16px;
+  flex-direction: column;
+  align-items: stretch;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  z-index: 999;
+  padding: 0;
+  transition: max-height 0.5s ease, opacity 0.5s ease, padding 0.3s ease;
+}
 
-  .buttons.open {
-    max-height: 300px; /* Show when open */
-    opacity: 1; /* Show when open */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
+.buttons.open {
+  max-height: 500px;
+  opacity: 1;
+  padding: 12px 0;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
 
-  .buttons a {
-    width: 90%;
-    margin: 8px auto;
-    padding: 6px 0;
-    font-size: 0.9rem;
-    text-align: center;
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    color: #111;
-    font-weight: 600;
-    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.08);
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
+.buttons a {
+  width: 90%;
+  margin: 12px auto;
+  padding: 10px 0;
+  font-size: 1rem;
+  text-align: center;
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  color: #111;
+  font-weight: 600;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+  opacity: 0;
+  transform: translateY(-10px);
+  animation: navLinkFade 0.4s ease forwards;
+}
+
+.buttons.open a:nth-child(1) { animation-delay: 0.1s; }
+.buttons.open a:nth-child(2) { animation-delay: 0.2s; }
+/* add more delays if you have more links */
+
+@keyframes navLinkFade {
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
+}
+
 
   /* Animate 3 dots into 1 red dot */
   .menu-toggle.open span:nth-child(1),
@@ -175,6 +274,19 @@ body {
     border-radius: 50%;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* Hero Container */
@@ -798,11 +910,6 @@ body {
         font-size: 0.9rem;
     }
 
-    .profile-pic {
-        width: 35px;
-        height: 35px;
-        margin-left: 10px;
-    }
 
     .hero {
         border-radius: 40px;
@@ -1322,3 +1429,39 @@ body {
     margin-bottom: 20px; /* Reduced space below the heading */
     line-height: 1.2;
 }
+
+
+
+
+
+
+.floating-contact {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #5d74c7;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 30px;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  z-index: 9999;
+}
+
+.floating-contact i {
+  font-size: 1.1rem;
+}
+
+/* Cool hover effect */
+.floating-contact:hover {
+  background-color: #4a61b0;
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(93, 116, 199, 0.5);
+}
+
