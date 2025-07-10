@@ -1,4 +1,4 @@
-/* Reset + Font */
+/* Global reset and base */
 * {
   margin: 0;
   padding: 0;
@@ -12,17 +12,42 @@ body {
   text-align: center;
 }
 
-/* Top Navigation */
+/* Top Bar Layout */
 .top-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 30px 40px;
+  padding: 20px 30px;
+  position: relative;
 }
+
+/* Profile Picture */
+.profile-pic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid white;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+/* Centered Logo */
 .logo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   font-size: 1.4rem;
   color: #111;
+  white-space: nowrap;
 }
+
+/* Navigation Buttons */
+.buttons {
+  display: flex;
+  align-items: center;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+
 .buttons a {
   text-decoration: none;
   margin: 0 10px;
@@ -32,19 +57,121 @@ body {
   border-radius: 8px;
   box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
   font-weight: bold;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
 }
-.buttons {
-  display: flex;
-  align-items: center;
+
+/* Hover animation */
+.buttons a::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.03);
+  transition: all 0.4s ease;
+  z-index: -1;
 }
-.profile-pic {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-left: 20px;
-  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
-  border: 2px solid white;
+.buttons a:hover::after {
+  left: 0;
+}
+.buttons a:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Hide hamburger by default */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 24px;
+  height: 20px;
+  cursor: pointer;
+}
+.menu-toggle span {
+  display: block;
+  height: 4px;
+  width: 100%;
+  background: #000;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+/* Responsive for mobile */
+@media (max-width: 600px) {
+  .top-bar {
+    padding: 15px 20px;
+  }
+
+  .logo {
+    font-size: 1.2rem;
+  }
+
+  .profile-pic {
+    width: 36px;
+    height: 36px;
+    margin: 12px auto;
+  }
+
+  .menu-toggle {
+    display: flex; /* 👈 this is the fix */
+  }
+
+  .buttons {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    right: 0;
+    background: #fff;
+    flex-direction: column;
+    align-items: stretch;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    z-index: 999;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+  }
+
+  .buttons.open {
+    max-height: 300px;
+    opacity: 1;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+
+  .buttons a {
+    width: 90%;
+    margin: 8px auto;
+    padding: 6px 0;
+    font-size: 0.9rem;
+    text-align: center;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    color: #111;
+    font-weight: 600;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Animate 3 dots into 1 red dot */
+  .menu-toggle.open span:nth-child(1),
+  .menu-toggle.open span:nth-child(3) {
+    opacity: 0;
+  }
+
+  .menu-toggle.open span:nth-child(2) {
+    background: red;
+    width: 8px;
+    height: 8px;
+    margin: auto;
+    border-radius: 50%;
+  }
 }
 
 

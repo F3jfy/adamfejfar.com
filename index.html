@@ -12,14 +12,23 @@
     </head>
 
     <body>
-    <div class="top-bar">
-        <div class="logo">Adam Fejfar</div>
-        <div class="buttons">
-        <a href="https://www.instagram.com/photos_by_fejfy/?hl=cs">INSTAGRAM</a>
-        <a href="https://github.com/F3jfy">GITHUB</a>
-        <img class="profile-pic" src="pp.jpg" alt="Adam Fejfar" />
+   <div class="top-bar">
+  <img class="profile-pic" src="pp.jpg" alt="Adam Fejfar" />
 
-        </div>
+  <div class="logo">Adam Fejfar</div>
+
+  <div class="menu-toggle" id="menuToggle">
+    <span></span><span></span><span></span>
+  </div>
+
+  <div class="buttons" id="menu">
+    <a href="https://www.instagram.com/photos_by_fejfy/?hl=cs">INSTAGRAM</a>
+    <a href="https://github.com/F3jfy">GITHUB</a>
+    <a href="contact.html">CONTACT</a>
+  </div>
+</div>
+
+
     </div>
 
     <section class="hero-wrapper">
@@ -153,6 +162,16 @@
             </div>
         </div>
     </section>
+<script>
+  const menuToggle = document.getElementById('menuToggle');
+  const menu = document.getElementById('menu');
+
+  menuToggle.addEventListener('click', () => {
+    menu.classList.toggle('open');
+    menuToggle.classList.toggle('open');
+  });
+</script>
+
 
     <script src="script.js"></script>
     </body>
