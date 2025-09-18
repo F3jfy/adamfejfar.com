@@ -16,14 +16,14 @@
     </head>
 
     <body>
-   <div class="top-bar">
+  <div class="top-bar">
   <img src="pp.jpg" alt="Profile" class="profile-pic" />
-
   <div class="logo">Adam Fejfar</div>
+</div>
 
-  <div id="menuToggle" class="menu-toggle">
-    <span></span><span></span><span></span>
-  </div>
+<!-- Move this OUTSIDE the top-bar -->
+<div id="menuToggle" class="menu-toggle">
+  <span></span><span></span><span></span>
 </div>
 
 <div id="menu" class="overlay-menu">
@@ -306,48 +306,7 @@
 
 
 
-<script>
-  const menuToggle = document.getElementById('menuToggle');
-  const menu = document.getElementById('menu');
-  const menuLinks = document.querySelectorAll('.overlay-menu a');
 
-  menuToggle.addEventListener('click', () => {
-    menu.classList.toggle('open');
-    menuToggle.classList.toggle('open');
-  });
-
-  // Close the menu when any internal link is clicked
-  menuLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-      const href = link.getAttribute('href');
-      if (href.startsWith('#')) {
-        menu.classList.remove('open');
-        menuToggle.classList.remove('open');
-      }
-    });
-  });
-
-  // Highlight the active section as user scrolls
-  const sections = document.querySelectorAll('section');
-  window.addEventListener('scroll', () => {
-    let scrollPos = window.scrollY + 150;
-
-    sections.forEach(section => {
-      const id = section.getAttribute('id');
-      const offsetTop = section.offsetTop;
-      const offsetHeight = section.offsetHeight;
-
-      const link = document.querySelector(`.overlay-menu a[href="#${id}"]`);
-      if (link) {
-        if (scrollPos >= offsetTop && scrollPos < offsetTop + offsetHeight) {
-          link.classList.add('active');
-        } else {
-          link.classList.remove('active');
-        }
-      }
-    });
-  });
-</script>
 
 
 
