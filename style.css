@@ -418,6 +418,39 @@ body {
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
 }
 
+/* Category header */
+.featured-work-header {
+  text-align: center;
+  margin-bottom: 40px;
+  max-width: 800px;
+}
+
+.featured-work-header h2 {
+  font-size: 2rem;
+  color: #5d74c7;
+  margin-bottom: 10px;
+}
+
+.featured-work-header p {
+  font-size: 1rem;
+  color: #555;
+}
+
+/* Optional tech badges */
+.project-tags {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.project-tags span {
+  background: #eef2f9;
+  color: #5d74c7;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
 
 
 
@@ -1118,118 +1151,188 @@ body {
 
 
 
-/* About Me Section Styles - Designed to fit adamfejfar.com/webdevelopment */
-
-/* Container for the entire section, similar to .content-section */
-/* About Me Section CSS */
+/* === ABOUT ME SECTION === */
 
 .about-section-wrapper {
-    padding: 60px 20px; /* Matches padding of other content sections */
-    display: flex;
-    justify-content: center;
-    color: #333; /* Default text color for this section */
-    background: #f8f8f8; /* Matches the body background of the webdevelopment page */
+  padding: 60px 20px;
+  display: flex;
+  justify-content: center;
+  background: #f8f8f8; /* matches body background */
+  color: #333;
 }
 
-/* Inner container for the About Me content, similar to .content-container */
 .about-content-container {
-    background: #ffffff; /* White background */
-    border-radius: 24px; /* Rounded corners */
-    padding: 40px; /* Inner padding */
-    width: 100%;
-    max-width: 1100px; /* Adjust this max-width if you want it narrower, matching your .content-container */
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08); /* Subtle shadow */
-    text-align: center; /* Center align content within the container */
-    
-    /* --- Subtle Hover Effect Additions (similar to step-card) --- */
-    position: relative; /* Needed for pseudo-element positioning */
-    overflow: hidden; /* Ensures the glow stays within the rounded corners */
-    z-index: 1; /* Ensures content is above the glow */
-    /* Smoother transition for transform, box-shadow, and background */
-    transition: transform 0.4s ease-out, box-shadow 0.4s ease-out, background 0.4s ease-in-out; 
-    /* --- End Subtle Hover Effect Additions --- */
+  background: linear-gradient(180deg, #ffffff 0%, #ffffff 100%); /* looks solid but is a gradient */
+  border-radius: 24px;
+  padding: 40px;
+  width: 100%;
+  max-width: 1100px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s ease, 
+              box-shadow 0.4s ease, 
+              background 0.6s ease; /* smoother timing */
 }
 
-/* Pseudo-element for the "subtle glow" effect (similar to step-card) */
-.about-content-container::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0; /* Start with no width/height */
-    height: 0; /* Start with no width/height */
-    background: radial-gradient(circle, rgba(93, 116, 199, 0.15) 0%, rgba(93, 116, 199, 0) 70%); /* Softer blue glow */
-    border-radius: 50%;
-    transform: translate(-50%, -50%); /* Center the pseudo-element */
-    opacity: 0; /* Start invisible */
-    /* Smoother transition for glow expansion */
-    transition: width 0.5s ease-in-out, height 0.5s ease-in-out, opacity 0.5s ease-in-out;
-    z-index: -1; /* Place it behind the content */
-}
-
-/* Heading for the About Me section (e.g., "About Me") */
-.about-content-container h2 {
-    font-size: 2.2rem; /* Matches .content-container h2 */
-    color: #5d74c7; /* Primary blue color */
-    margin-bottom: 25px;
-    font-family: 'Inter', sans-serif; /* Use Inter font as per other content */
-    font-weight: bold; /* Keep it bold for a heading */
-    position: relative; /* Ensure text stays above glow */
-    z-index: 2; /* Ensure text stays above glow */
-}
-
-/* Paragraph text within the About Me section */
-.about-content-container p {
-    font-size: 1.1rem; /* Matches .content-container p */
-    line-height: 1.7;
-    margin-bottom: 20px;
-    color: #333; /* Darker text for readability on white background */
-    font-family: 'Inter', sans-serif; /* Use Inter font */
-    font-style: normal; /* Remove italic style to match other content sections */
-    position: relative; /* Ensure text stays above glow */
-    z-index: 2; /* Ensure text stays above glow */
-}
-
-/* Specific styling for the strong (bolded) text within the paragraph */
-.about-content-container p strong {
-    font-weight: bold; /* Ensure bold text remains bold */
-    color: #333; /* Keep bold text color consistent with paragraph */
-}
-
-/* --- Subtle Hover Effect (similar to step-card) --- */
 .about-content-container:hover {
-    transform: translateY(-8px); /* Less pronounced lift, no rotation */
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); /* Softer shadow */
-    /* Updated: Gradient from lighter color to white */
-    background: linear-gradient(180deg, #eef2f9 0%, #ffffff 100%); 
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(93,116,199,0.2);
+  background: linear-gradient(180deg, #ffffff 0%, #fbfcff 100%);
 }
+
 
 .about-content-container:hover::before {
-    width: 120%; /* Smaller glow expansion */
-    height: 120%; /* Smaller glow expansion */
-    opacity: 0.8; /* Slightly less opaque glow */
-}
-/* --- End Subtle Hover Effect --- */
-
-/* Responsive adjustments for smaller screens */
-@media (max-width: 768px) {
-    .about-content-container {
-        padding: 25px; /* Smaller padding on mobile */
-    }
-    .about-content-container h2 {
-        font-size: 1.8rem; /* Smaller heading on mobile */
-    }
-    .about-content-container p {
-        font-size: 1rem; /* Smaller paragraph text on mobile */
-    }
-    /* Adjust hover effect for smaller screens if needed */
-    .about-content-container:hover {
-        transform: translateY(-5px); /* Even subtler lift on mobile, no rotation */
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12); /* Even subtler shadow on mobile */
-    }
+  width: 120%;
+  height: 120%;
+  opacity: 0.8;
 }
 
+/* Section heading */
+.about-content-container h2 {
+  font-size: 2.2rem;
+  color: #5d74c7;
+  margin-bottom: 30px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  text-align: center;
+}
 
+/* Layout inside */
+.about-flex {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+/* Left column */
+.about-intro {
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: #444;
+  margin-bottom: 24px;
+}
+
+.quick-facts {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.quick-facts .fact {
+  background: #eef2f9;
+  padding: 18px 20px;
+  border-radius: 16px;
+  text-align: center;
+  flex: 1;
+  min-width: 140px;
+}
+
+.quick-facts .fact-number {
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: #5d74c7;
+  line-height: 1;
+}
+
+.quick-facts .fact-label {
+  display: block;
+  font-size: 0.95rem;
+  color: #555;
+  margin-top: 6px;
+}
+
+/* Right column */
+.skills-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 14px;
+  color: #5d74c7;
+}
+
+.skill-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.chip {
+  background: #eef2f9;
+  color: #5d74c7;
+  border: 1px solid rgba(93,116,199,0.25);
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.chip:hover {
+  transform: translateY(-2px);
+  background: #e6ebfb;
+  box-shadow: 0 6px 16px rgba(93,116,199,0.25);
+}
+
+/* Links */
+.links-inline {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.about-links {
+  margin-top: 30px; /* separates it from skills */
+  display: flex;
+  justify-content: center; /* center them under everything */
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.link-pill {
+  text-decoration: none;
+  padding: 12px 20px;
+  border-radius: 999px;
+  border: 1.5px solid #5d74c7;
+  color: #5d74c7;
+  font-weight: 700;
+  transition: background 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+}
+
+.link-pill:hover {
+  background: #5d74c7;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(93,116,199,0.35);
+}
+
+
+/* Responsive */
+@media (max-width: 900px) {
+  .about-flex {
+    grid-template-columns: 1fr;
+  }
+  .quick-facts {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .about-content-container {
+    padding: 28px;
+  }
+  .about-content-container h2 {
+    font-size: 1.8rem;
+  }
+  .about-intro {
+    font-size: 1rem;
+  }
+  .quick-facts .fact {
+    min-width: 120px;
+    padding: 14px 16px;
+  }
+}
 
 
 
@@ -1351,3 +1454,254 @@ body {
   box-shadow: 0 8px 25px rgba(93, 116, 199, 0.5);
 }
 
+.hero-name {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+  color: #fff;
+  font-family: 'Inter', serif;
+}
+
+.hero-title {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: 25px;
+  color: #eee;
+  font-family: 'Inter', sans-serif;
+}
+
+.hero-buttons {
+  margin-top: 35px;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.hero-btn {
+  padding: 12px 28px;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.hero-btn.primary {
+  background: #fff;
+  color: #5d74c7;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+.hero-btn.primary:hover {
+  background: #eef2f9;
+  transform: translateY(-3px);
+}
+
+.hero-btn.secondary {
+  background: transparent;
+  border: 2px solid #fff;
+  color: #fff;
+}
+
+.hero-btn.secondary:hover {
+  background: rgba(255,255,255,0.1);
+  transform: translateY(-3px);
+}
+.timeline {
+  position: relative;
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 20px 0;
+}
+
+/* vertical line */
+.timeline::after {
+  content: '';
+  position: absolute;
+  width: 3px;
+  background: #5d74c7;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  margin-left: -1.5px;
+}
+
+/* timeline items */
+.timeline-item {
+  padding: 20px 30px;
+  position: relative;
+  width: 50%;
+}
+
+.timeline-item.left { left: 0; }
+.timeline-item.right { left: 50%; }
+
+/* content boxes */
+.timeline-content {
+  background: #ffffff;
+  padding: 20px 25px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.timeline-content:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+}
+
+/* dots on line */
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  top: 25px;
+  right: -11px;
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  border: 3px solid #5d74c7;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.timeline-item.right::before {
+  left: -11px;
+  right: auto;
+}
+
+/* text styles */
+.timeline-content h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #333;
+}
+
+.timeline-content .timeline-date {
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #fff;
+  background: #5d74c7;
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 12px;
+}
+
+.timeline-content p {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* responsive */
+@media (max-width: 768px) {
+  .timeline::after { left: 20px; }
+  .timeline-item { width: 100%; padding-left: 50px; padding-right: 25px; }
+  .timeline-item.right { left: 0; }
+  .timeline-item::before { left: 8px; right: auto; }
+}
+.skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin: 20px 0 40px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.site-footer {
+  background: #f8f8f8;
+  padding: 50px 20px 20px;
+  margin-top: 60px;
+  color: #333;
+  border-top: 2px solid #eef2f9;
+}
+
+.footer-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+/* Brand */
+.footer-brand h3 {
+  font-size: 1.4rem;
+  color: #5d74c7;
+  margin-bottom: 6px;
+}
+.footer-brand p {
+  font-size: 1rem;
+  color: #666;
+}
+
+/* Links */
+.footer-links {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.footer-links a {
+  text-decoration: none;
+  font-weight: 600;
+  color: #555;
+  transition: color 0.3s ease;
+}
+.footer-links a:hover {
+  color: #5d74c7;
+}
+
+/* Social Icons */
+.footer-socials a {
+  color: #5d74c7;
+  font-size: 1.4rem;
+  margin-right: 15px;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+.footer-socials a:hover {
+  transform: translateY(-3px);
+  color: #4a63a5;
+}
+
+/* Bottom */
+.footer-bottom {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 0.9rem;
+  color: #777;
+  border-top: 1px solid #e1e1e1;
+  padding-top: 15px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .footer-links {
+    justify-content: center;
+  }
+  .footer-socials {
+    margin-top: 10px;
+  }
+}
