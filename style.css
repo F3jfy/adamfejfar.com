@@ -55,6 +55,9 @@ body {
   color: #111;
   white-space: nowrap;
 }
+.project-overlay {
+  pointer-events: none; /* good: allows clicks through */
+}
 
 /* Hide horizontal buttons everywhere */
 .buttons {
@@ -337,7 +340,6 @@ body {
 }
 
 .project-card:hover {
-  transform: rotate(-1deg);
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
 }
 
@@ -601,184 +603,63 @@ body {
     margin-bottom: 20px;
 }
 
-.services-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    margin-top: 30px;
-    margin-bottom: 40px;
-    align-items: center;
-}
-
-.service-card {
-    background: #eef2f9;
-    border-radius: 18px;
-    padding: 30px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    
-    /* --- Subtle Hover Effect Additions (copied from step-card) --- */
-    position: relative; /* Needed for pseudo-element positioning */
-    overflow: hidden; /* Ensures the glow stays within the rounded corners */
-    z-index: 1; /* Ensures content is above the glow */
-    transition: transform 0.4s ease-out, box-shadow 0.4s ease-out, background 0.4s ease-in-out; 
-    /* --- End Subtle Hover Effect Additions --- */
-
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    text-align: left;
-    width: 100%; /* Make cards take full width of their container */
-}
-
-/* Pseudo-element for the "subtle glow" effect on service cards (copied from step-card) */
-.service-card::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0; /* Start with no width/height */
-    height: 0; /* Start with no width/height */
-    background: radial-gradient(circle, rgba(93, 116, 199, 0.15) 0%, rgba(93, 116, 199, 0) 70%); /* Softer blue glow */
-    border-radius: 50%;
-    transform: translate(-50%, -50%); /* Center the pseudo-element */
-    opacity: 0; /* Start invisible */
-    transition: width 0.5s ease-in-out, height 0.5s ease-in-out, opacity 0.5s ease-in-out;
-    z-index: -1; /* Place it behind the content */
-}
-
-.service-card:hover {
-    transform: translateY(-8px); /* Less pronounced lift, no rotation */
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); /* Softer shadow */
-    background: #e6eaf3; /* Subtle background color change on hover (copied from step-card) */
-}
-
-.service-card:hover::before {
-    width: 120%; /* Smaller glow expansion */
-    height: 120%; /* Smaller glow expansion */
-    opacity: 0.8; /* Slightly less opaque glow */
-}
-
-.service-card h4 {
-    font-size: 1.4rem;
-    color: #5d74c7;
-    margin-bottom: 12px;
-    margin-top: 0;
-    font-family: 'Inter', sans-serif;
-    position: relative; /* Ensure text stays above glow */
-    z-index: 2; /* Ensure text stays above glow */
-}
-
-.service-card p {
-    font-size: 1rem;
-    line-height: 1.6;
-    color: #555;
-    margin-bottom: 0;
-    position: relative; /* Ensure text stays above glow */
-    z-index: 2; /* Ensure text stays above glow */
-}
-
-/* --- Media Queries for Services (Simplified as they are already stacked) --- */
-@media (max-width: 768px) {
-    .service-card {
-        padding: 25px;
-        max-width: 100%; /* Ensure full width on smaller screens */
-    }
-    .service-card h4 {
-        font-size: 1.3rem;
-    }
-    /* Adjust hover effect for smaller screens (copied from step-card) */
-    .service-card:hover {
-        transform: translateY(-5px); /* Even subtler lift on mobile, no rotation */
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12); /* Even subtler shadow on mobile */
-    }
-}
-
-/* Process Steps Styles with Mind-blowing Hover Effect */
 
 .process-steps {
-    display: grid;
-    gap: 25px;
-    margin-top: 30px;
-    margin-bottom: 40px;
-    grid-template-columns: repeat(2, 1fr); /* Explicitly 2 columns */
-    margin-left: auto; /* Center the grid */
-    margin-right: auto; /* Center the grid */
+  display: grid;
+  gap: 30px; /* space between cards */
+  margin-top: 40px;
+  margin-bottom: 50px;
+  grid-template-columns: repeat(2, 1fr); /* 2 per row on larger screens */
 }
 
 .step-card {
-    background: #eef2f9;
-    border-radius: 15px;
-    padding: 25px;
-    text-align: center;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    
-    /* --- Subtle Hover Effect Additions --- */
-    position: relative; /* Needed for pseudo-element positioning */
-    overflow: hidden; /* Ensures the glow stays within the rounded corners */
-    z-index: 1; /* Ensures content is above the glow */
-    /* Smoother transition for transform, box-shadow, and background */
-    transition: transform 0.4s ease-out, box-shadow 0.4s ease-out, background 0.4s ease-in-out; 
-    /* --- End Subtle Hover Effect Additions --- */
-}
+  background: rgba(93, 116, 199, 0.12); /* soft blue tint */
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 20px;
+  padding: 30px;
+  text-align: center;
+  border: 1px solid rgba(93, 116, 199, 0.25);
+  box-shadow: 0 6px 18px rgba(93, 116, 199, 0.1);
 
-/* Pseudo-element for the "subtle glow" effect on step cards */
-.step-card::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0; /* Start with no width/height */
-    height: 0; /* Start with no width/height */
-    background: radial-gradient(circle, rgba(93, 116, 199, 0.15) 0%, rgba(93, 116, 199, 0) 70%); /* Softer blue glow */
-    border-radius: 50%;
-    transform: translate(-50%, -50%); /* Center the pseudo-element */
-    opacity: 0; /* Start invisible */
-    /* Smoother transition for glow expansion */
-    transition: width 0.5s ease-in-out, height 0.5s ease-in-out, opacity 0.5s ease-in-out;
-    z-index: -1; /* Place it behind the content */
+  transition: transform 0.35s ease, 
+              box-shadow 0.35s ease, 
+              border 0.35s ease, 
+              background 0.35s ease;
+  position: relative;
+  z-index: 1;
 }
 
 .step-card:hover {
-    transform: translateY(-8px); /* Less pronounced lift */
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); /* Softer shadow */
-    /* Reverted to a subtle solid background color on hover */
-    background: #e6eaf3; /* A slightly darker shade of the original background for subtle change */
+  transform: translateY(-6px);
+  background: rgba(93, 116, 199, 0.2); /* stronger blue on hover */
+  box-shadow: 0 12px 28px rgba(93, 116, 199, 0.2);
+  border: 1px solid rgba(93, 116, 199, 0.45);
 }
 
-.step-card:hover::before {
-    width: 120%; /* Smaller glow expansion */
-    height: 120%; /* Smaller glow expansion */
-    opacity: 0.8; /* Slightly less opaque glow */
-}
-
+/* Typography inside cards */
 .step-card h3 {
-    font-family: 'Inter', sans-serif;
-    font-size: 1.3rem;
-    color: #5d74c7; /* Original color */
-    margin-bottom: 10px;
-    margin-top: 0;
-    position: relative; /* Ensure text stays above glow */
-    z-index: 2; /* Ensure text stays above glow */
-    /* Smoother transition for text color */
-    transition: color 0.4s ease-in-out; 
+  font-family: 'Inter', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #5d74c7;
+  margin-bottom: 12px;
 }
 
 .step-card p {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: #555; /* Original color */
-    margin-bottom: 0;
-    position: relative; /* Ensure text stays above glow */
-    z-index: 2; /* Ensure text stays above glow */
-    /* Smoother transition for text color */
-    transition: color 0.4s ease-in-out; 
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #333;
 }
 
-/* Removed: Text color to white on hover */
-/* .step-card:hover h3,
-.step-card:hover p {
-    color: white;
-} */
+/* Responsive: stack nicely */
+@media (max-width: 768px) {
+  .process-steps {
+    grid-template-columns: 1fr; /* stack */
+    gap: 20px; /* smaller spacing */
+  }
+}
+
 
 /* Responsive adjustments for smaller screens */
 @media (max-width: 768px) { /* Adjust breakpoint if you want them to stack sooner */
@@ -1767,4 +1648,194 @@ body {
   .footer-socials {
     margin-top: 10px;
   }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Quick Facts Grid */
+.quick-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin: 30px 0;
+}
+
+/* Liquid Glass Style */
+.quick-facts .fact {
+  background: rgba(93, 116, 199, 0.15); /* soft blue tint */
+  border: 1px solid rgba(93, 116, 199, 0.25);
+  backdrop-filter: blur(14px) saturate(150%);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+  border-radius: 20px;
+  padding: 24px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.4s ease;
+  box-shadow: 0 4px 10px rgba(93,116,199,0.1);
+}
+
+.quick-facts .fact:hover {
+  transform: translateY(-6px);
+  background: rgba(93, 116, 199, 0.25); /* stronger tint on hover */
+  box-shadow: 0 12px 28px rgba(93,116,199,0.25);
+}
+
+.quick-facts .fact-number {
+  font-size: 1.8rem;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.quick-facts .fact-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #222;
+}
+
+/* Responsive Layout Tweaks */
+@media (min-width: 1000px) {
+  .quick-facts {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .quick-facts .fact:nth-child(4) {
+   grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 999px) and (min-width: 600px) {
+  .quick-facts {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 599px) {
+  .quick-facts {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* Project Goals */
+.project-goals {
+  display: grid;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.project-goals li {
+  background: #ffffff;
+  border: 1px solid rgba(93,116,199,0.15);
+  border-radius: 12px;
+  padding: 14px 18px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #444;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.project-goals li::before {
+  content: "✔";
+  color: #5d74c7;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.project-goals li:hover {
+  transform: translateX(6px);
+  box-shadow: 0 6px 16px rgba(93,116,199,0.15);
+}
+.sketch-preview {
+  display: flex;
+  gap: 15px;
+  margin-top: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.sketch-preview img {
+  width: 100%;
+  max-width: 200px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease;
+}
+
+.sketch-preview img:hover {
+  transform: scale(1.05);
+}
+
+.visit-site {
+  margin-top: 25px;
+  text-align: center;
+}
+
+.visit-button {
+  display: inline-block;
+  background: #5d74c7;
+  color: #fff;
+  padding: 12px 28px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 18px rgba(93,116,199,0.25);
+}
+
+.visit-button:hover {
+  background: #4a63a5;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(93,116,199,0.35);
 }
