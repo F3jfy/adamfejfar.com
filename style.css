@@ -1281,87 +1281,78 @@ body {
 
 
 /* CSS for the "Let's Connect!" button */
-
-.lets-connect-button {
-    display: inline-block;
-    background: #ffffff;
-    color: #5d74c7;
-    padding: 15px 35px;
-    border-radius: 10px;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 1.2rem;
-    /* Enhanced transition for a smoother animation */
-    transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease-out, box-shadow 0.3s ease-out;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    border: none;
-    cursor: pointer;
-}
-
-.lets-connect-button:hover {
-    background: #eef2f9;
-    /* More dynamic lift and subtle scale for a "pop" effect */
-    transform: translateY(-5px) scale(1.02);
-    color: #4a63a5;
-    /* A more vibrant, blue-toned shadow for a "glow" effect */
-    box-shadow: 0 8px 25px rgba(93, 116, 199, 0.4);
-}
-
-
-/* Responsive adjustments for smaller screens */
-@media (max-width: 768px) {
-    .lets-connect-button {
-        padding: 12px 25px; /* Smaller padding on mobile */
-        font-size: 1.1rem; /* Slightly smaller font on mobile */
-    }
-  .call-to-action-container {
-        padding: 30px 20px; /* Adjusted padding for smaller screens */
-    }
-    .call-to-action-container h2 {
-        font-size: 1.8rem; /* Adjusted font size for smaller screens */
-        margin-bottom: 15px; /* Adjust space for smaller screens */
-    }
-}
-
-@media (max-width: 480px) {
-    .lets-connect-button {
-        font-size: 1rem; /* Even smaller font on very small screens */
-    }
-    .call-to-action-container h2 {
-        font-size: 1.4rem; /* Adjusted font size for very small screens */
-        margin-bottom: 10px; /* Further adjust space for very small screens */
-    }
-}
-
+/* Back to Projects Section */
 .call-to-action-section {
-    padding: 40px 15px; /* Reduced padding */
-    display: flex;
-    justify-content: center;
-    background: #f8f8f8; /* Matches body background */
-    text-align: center;
+  padding: 60px 20px;
+  display: flex;
+  justify-content: center;
+  background: #f8f8f8; /* match rest of site */
+  text-align: center;
 }
 
 .call-to-action-container {
-    background: none; /* Removed background */
-    border-radius: 20px; /* Slightly smaller border-radius */
-    padding: 30px 25px; /* Reduced padding */
-    width: 100%;
-    max-width: 700px; /* Reduced max-width */
-    box-shadow: none; /* Removed box-shadow as there's no background */
-    color: #333; /* Changed text color to dark gray for visibility on transparent background */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  background: #ffffffd9; /* subtle glass look */
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 40px 30px;
+  width: 100%;
+  max-width: 700px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(93, 116, 199, 0.15); /* faint blue border */
 }
 
 .call-to-action-container h2 {
-    font-size: 2.2rem; /* Reduced font size */
-    font-family: 'Inter', sans-serif;
-    font-weight: bold;
-    margin-bottom: 20px; /* Reduced space below the heading */
-    line-height: 1.2;
+  font-size: 2rem;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  margin-bottom: 25px;
+  line-height: 1.3;
+  color: #5d74c7;
 }
+
+/* Refined button */
+.lets-connect-button {
+  display: inline-block;
+  background: linear-gradient(135deg, #ffffff, #f5f7ff);
+  color: #5d74c7;
+  padding: 14px 34px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 18px rgba(93, 116, 199, 0.15);
+  border: 1.5px solid rgba(93, 116, 199, 0.3);
+  cursor: pointer;
+}
+
+.lets-connect-button:hover {
+  background: linear-gradient(135deg, #5d74c7, #6f85d8);
+  color: #fff;
+  transform: translateY(-4px);
+  box-shadow: 0 10px 28px rgba(93, 116, 199, 0.35);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .call-to-action-container {
+    padding: 30px 20px;
+  }
+  .call-to-action-container h2 {
+    font-size: 1.7rem;
+    margin-bottom: 18px;
+  }
+  .lets-connect-button {
+    padding: 12px 26px;
+    font-size: 1rem;
+  }
+}
+
 
 
 
@@ -1838,4 +1829,78 @@ body {
   background: #4a63a5;
   transform: translateY(-3px);
   box-shadow: 0 10px 25px rgba(93,116,199,0.35);
+}
+
+
+/* Reflection container */
+.reflection-container {
+  text-align: center;
+}
+
+.reflection-intro {
+  font-size: 1.1rem;
+  margin-bottom: 25px;
+  color: #444;
+}
+
+/* Grid of points */
+.reflection-points {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  text-align: left;
+}
+
+.reflection-point {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.reflection-point:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.12);
+}
+
+.reflection-point i {
+  font-size: 1.5rem;
+  color: #5d74c7;
+  margin-bottom: 10px;
+}
+.back-button-container {
+  text-align: center;
+  max-width: 700px; /* same vibe as your content */
+  margin: 0 auto; /* centers it */
+  padding: 40px 20px;
+}
+
+.back-button-container p {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.back-glass-button {
+  display: inline-block;
+  padding: 12px 28px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  color: #5d74c7;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  transition: all 0.3s ease;
+}
+
+.back-glass-button:hover {
+  background: rgba(93, 116, 199, 0.9);
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(93, 116, 199, 0.35);
 }
